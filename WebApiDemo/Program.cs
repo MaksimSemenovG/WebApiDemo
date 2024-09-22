@@ -1,5 +1,7 @@
 using Application;
+using Core.Interfaces.ExternalServices;
 using Core.Interfaces.Repositories;
+using Infrastructure.ExternalServices;
 using Infrastructure.Persistence.Context;
 using Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +15,9 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IAppl
 
 builder.Services.AddScoped<ITherapistRepository, TherapistRepository>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+
+builder.Services.AddScoped<IEmailSender, FakeEmailSender>();
+builder.Services.AddScoped<IPartnerEventSender, FakePartnerEventSender>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
